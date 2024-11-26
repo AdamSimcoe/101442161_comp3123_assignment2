@@ -1,12 +1,21 @@
 // Created by Adam Simcoe - 101442161
-// Last Updated - October 10th, 2024
+// Last Updated - November 26th, 2024
 
 const express = require('express');
+const cors = require('cors');
 const { connectDB } = require('./database/mongoDb');
 const setupSampleUsers = require('./database/sampleUsers')
 require('dotenv').config();
 
 const app = express();
+
+// CORS configuration for requests from front-end
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+}));
 
 // Initialize DB then run sample users data
 connectDB()
