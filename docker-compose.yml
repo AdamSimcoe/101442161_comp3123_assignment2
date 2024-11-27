@@ -1,3 +1,7 @@
+# Created by Adam Simcoe - 101442161
+# Last Updated November 26th, 2024
+# docker-compose -p comp3123-assignment2 up --build -d
+
 version: '3.9'
 
 services:

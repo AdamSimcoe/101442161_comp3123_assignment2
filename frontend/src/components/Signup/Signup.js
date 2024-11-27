@@ -1,5 +1,5 @@
 // Created by Adam Simcoe - 101442161 
-// Last Updated - November 25th, 2024 
+// Last Updated - November 26th, 2024 
 
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -39,7 +39,7 @@ const Signup = () => {
     return (
         <div className='signup-container'>
             <form onSubmit={handleSignup} className='signup-form'>
-                <h2>Login Form</h2>
+                <h2>Signup Form</h2>
                 <div className='form-group'>
                     <label htmlFor='username'>Username</label>
                     <input
