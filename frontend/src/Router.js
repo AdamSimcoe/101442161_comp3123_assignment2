@@ -1,5 +1,5 @@
 // Created by Adam Simcoe - 101442161 
-// Last Updated - November 26th, 2024 
+// Last Updated - November 29th, 2024 
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -9,17 +9,52 @@ import EmployeeListPage from './pages/EmployeeListPage';
 import AddEmployeePage from './pages/AddEmployeePage';
 import EmployeeDetailsPage from './pages/EmployeeDetailsPage';
 import UpdateEmployeePage from './pages/UpdateEmployeePage';
+import Layout from './components/Layout/Layout';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 const AppRouter = () => {
     return (
         <Router>
             <Routes>
+                { /* Route Pathing for Pages */}
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />}  />
-                <Route path="/employees" element={<EmployeeListPage />} />
-                <Route path="/employees/add" element={<AddEmployeePage />} />
-                <Route path='/employees/update/:id' element={<UpdateEmployeePage />} />
-                <Route path="/employees/:id" element={<EmployeeDetailsPage />} />
+
+                {/* Incase employee routing behind our protected route based off user authentication*/}
+                <Route element={<Layout />}>
+                    <Route
+                        path='/employees'
+                        element={
+                            <ProtectedRoute>
+                                <EmployeeListPage />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path='/employees/add'
+                        element={
+                            <ProtectedRoute>
+                                <AddEmployeePage />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path='/employees/update/:id'
+                        element={
+                            <ProtectedRoute>
+                                <UpdateEmployeePage />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path='/employees/:id'
+                        element={
+                            <ProtectedRoute>
+                                <EmployeeDetailsPage />
+                            </ProtectedRoute>
+                        }
+                    />
+                </Route>
             </Routes>
         </Router>
     );

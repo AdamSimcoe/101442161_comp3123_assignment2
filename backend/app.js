@@ -1,10 +1,11 @@
 // Created by Adam Simcoe - 101442161
-// Last Updated - November 26th, 2024
+// Last Updated - November 29th, 2024
 
 const express = require('express');
 const cors = require('cors');
 const { connectDB } = require('./database/mongoDb');
-const setupSampleUsers = require('./database/sampleUsers')
+const setupSampleUsers = require('./database/sampleUsers');
+const setupSampleEmployees = require('./database/sampleEmployees');
 require('dotenv').config();
 
 const app = express();
@@ -20,8 +21,9 @@ app.use(cors({
 // Initialize DB then run sample users data
 connectDB()
     .then(async () => {
-        console.log('Database connection established. Setting up sample user data.');
+        console.log('Database connection established. Setting up sample data.');
         await setupSampleUsers();
+        await setupSampleEmployees();
     })
     .catch(err => {
         console.error('Failed to connect to the database.', err);

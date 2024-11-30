@@ -1,0 +1,314 @@
+/* Created by Adam Simcoe - 101442161
+Last Updated - November 29th, 2024 */
+
+/* Styling for all pages */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+}
+
+/* Form Elements */
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-message,
+.success-message {
+    color: #ff0000;
+    font-size: 14px;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #ff4c4c;
+    color: white;
+}
+
+.search-button {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.clear-button {
+    background-color: #f8f9fa;
+    color: #007bff;
+}
+
+/* Specific Page Styling */
+
+/* Add Employee */
+
+.add-employee-container {
+    background-color: #f7f7f7;
+    border: 3px solid black;
+    padding: 20px;
+    margin: 20px 0;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+}
+
+.add-employee-container h2 {
+    text-align: center;
+}
+
+.add-employee-form {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.add-employee-form input[type="text"],
+.add-employee-form input[type="email"],
+.add-employee-form input[type="number"],
+.add-employee-form input[type="date"] {
+    margin-right: 0; 
+}
+
+.form-actions button {
+    margin-right: 15px;
+}
+
+/* Employee List */
+
+.employee-list-container {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.employee-list-container h2 {
+    text-align: center;
+}
+
+.employee-list-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.employee-list-table th,
+.employee-list-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.employee-list-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.view-button {
+    background-color: lightblue;
+}
+
+.update-button {
+    background-color: lightgreen;
+}
+
+.delete-button {
+    background-color: lightcoral;
+}
+
+.view-button,
+.update-button,
+.delete-button {
+    margin-right: 10px;
+}
+
+.add-employee-button {
+    background-color: #66b3ff;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.employee-list-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Search Bar */
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 30%;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    width: 150px; 
+    padding: 8px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.search-container input {
+    margin-right: 10px;
+}
+
+.search-container button {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+/* Employee Details */
+
+.employee-details-container {
+    background-color: #f7f7f7; 
+    border: 3px solid black;
+    padding: 20px;
+    width: 30%; 
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+}
+
+.employee-details-container h2 {
+    text-align: center;
+}
+
+.employee-details-list {
+    background-color: #f7f7f7;
+    color: black;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.field-group {
+    margin-bottom: 10px;
+}
+
+.field-label {
+    font-weight: bold;
+}
+
+/* Navbar */
+
+.navbar {
+    background-color: #003366;
+    padding: 15px;
+    text-align: right;
+}
+
+.logout-button {
+    background-color: yellow;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Login and Signup */
+
+.login-container,
+.signup-container {
+    background-color: #f7f7f7;
+    border: 3px solid black;
+    padding: 20px;
+    margin-top: 50px;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+}
+
+.login-container,
+.signup-container h2 {
+    text-align: center;
+}
+
+.login-form,
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input,
+.signup-form input {
+    margin-bottom: 15px;
+    width: 90%;
+}
+
+.login-form button,
+.signup-form button {
+    background-color: #007bff; 
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* Update Employee */
+
+.update-employee-container {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border: 3px solid black;
+    border-radius: 8px;
+    margin: 20px 0;
+    width: 40%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.update-employee-container h2 {
+    text-align: center;
+}
+
+.update-employee-form {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+}

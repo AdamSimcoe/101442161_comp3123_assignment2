@@ -1,11 +1,14 @@
 // Created by Adam Simcoe - 101442161 
-// Last Updated - November 26th, 2024
+// Last Updated - November 29th, 2024
 
 import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import '../../styles.css';
 
 const AddEmployee = () => {
+
+    // State for storing form data of new employee
     const [employeeData, setEmployeeData] = useState({
         first_name: '',
         last_name: '',
@@ -15,28 +18,41 @@ const AddEmployee = () => {
         date_of_joining: '',
         department: '',
     });
-
+    
+    // States for success and error messages
     const [responseMessage, setResponseMessage] = useState('');
     const [error, setError] = useState('');
+
+    // Navigation hook for redirecting
     const navigate = useNavigate();
 
+    // Input field change handler
     const handleChange = (e) => {
         const { name, value } = e.target;
+
+        // Update field in the employee data state
         setEmployeeData((prevData) => ({ ...prevData, [name] : value }));
     };
 
+    // Form Submission
     const handleAdd = async (e) => {
+        // Stop default form from being submitted
         e.preventDefault();
+
+        // Reset success and error messages
         setResponseMessage('');
         setError('');
 
         try {
+            // POST request using user inputted employee data
             const response = await axios.post('http://localhost:5000/api/v1/emp/employees', employeeData, {
                 withCredentials: true,
             });
 
+            // Update success message, and provide default message for success
             setResponseMessage(response.data.message || "Employee added successfully.");
 
+            // Reset all form fields after success
             setEmployeeData({
                 first_name: '',
                 last_name: '',
@@ -51,6 +67,7 @@ const AddEmployee = () => {
         }
     };
 
+    // Navigate back to employees list page if canceled
     const handleCancel = () => {
         navigate('/employees');
     };
@@ -58,8 +75,9 @@ const AddEmployee = () => {
     return (
         <div className="add-employee-container">
             <h2>Add New Employee</h2>
+
+            {/* Add Employee Form */}
             <form onSubmit={handleAdd} className="add-employee-form">
-            
                 <div className="form-group">
                     <label htmlFor="first_name">First Name</label>
                     <input
@@ -138,9 +156,11 @@ const AddEmployee = () => {
                     />
                 </div>
 
+                {/* Success and Error Messages Section */}
                 {error && <p className="error-message">{error}</p>}
                 {responseMessage && <p className="success-message">{responseMessage}</p>}
 
+                {/* Add Employee and Cancel Buttons */}
                 <div className="form-actions">
                     <button type="submit" className="submit-button">Add Employee</button>
                     <button type="button" onClick={handleCancel} className="cancel-button">Cancel</button>

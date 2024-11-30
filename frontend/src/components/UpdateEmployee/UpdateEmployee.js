@@ -1,11 +1,14 @@
 // Created by Adam Simcoe - 101442161
-// Last Updated - November 26th, 2024
+// Last Updated - November 29th, 2024
 
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
+import '../../styles.css';
 
 const UpdateEmployee = () => {
+
+    // State for storing form data of updated employee
     const [employeeData, setEmployeeData] = useState({
         first_name: '',
         last_name: '',
@@ -16,46 +19,68 @@ const UpdateEmployee = () => {
         department: '',
     });
 
+    // States for success and error messages
     const [responseMessage, setResponseMessage] = useState('');
     const [error, setError] = useState('');
+
+    // Navigation hook for redirecting
     const navigate = useNavigate();
+
+    // Hook to extract the id parameter from the URL
     const { id } = useParams();
 
+    // Fetch specific employee data when component loads
     useEffect(() => {
         const fetchEmployeeData = async () => {
             try {
+                // GET request to get employee data based off ID
                 const response = await axios.get(`http://localhost:5000/api/v1/emp/employees/${id}`);
+
+                // Update state with the employee data from the request
                 setEmployeeData(response.data);
             } catch (err) {
                 setError(err.response?.data?.message || "An error has occured while fetching the employee's data.");
             }
         };
-        fetchEmployeeData();
-    }, [id]);
 
+        // Call function
+        fetchEmployeeData();
+    }, [id]); // Re-runs if ID is changed
+
+    // Input field change handler
     const handleChange = (e) => {
         const { name, value } = e.target;
+
+        // Update field in the employee data state
         setEmployeeData((prevData) => ({ ...prevData, [name] : value }));
     };
 
+    // Form submission
     const handleUpdate = async (e) => {
+        // Stop default form from being submitted
         e.preventDefault();
+
+        // Reset success and error messages
         setResponseMessage('');
         setError('');
 
         try {
+            // PUT request using user inputted employee data
             const response = await axios.put(`http://localhost:5000/api/v1/emp/employees/${id}`, employeeData, {
                 withCredentials: true,
             });
 
+            // Update success message, and provide default message for success
             setResponseMessage(response.data.message || "Employee updated successfully.");
-
+            
+            // Navigate to employee list page after timeout
             setTimeout(() => navigate('/employees'), 2000);
         } catch (err) {
             setError(err.response?.data?.message || "An error has occured while updating the employee.");
         }
     };
 
+    // Navigate to employee list page if canceled
     const handleCancel = () => {
         navigate('/employees');
     };
@@ -63,8 +88,9 @@ const UpdateEmployee = () => {
     return (
         <div className="update-employee-container">
             <h2>Update Employee</h2>
+
+            {/* Update Form */}
             <form onSubmit={handleUpdate} className="update-employee-form">
-            
                 <div className="form-group">
                     <label htmlFor="first_name">First Name</label>
                     <input
@@ -143,9 +169,11 @@ const UpdateEmployee = () => {
                     />
                 </div>
 
+                {/* Success and Error Messages */}
                 {error && <p className="error-message">{error}</p>}
                 {responseMessage && <p className="success-message">{responseMessage}</p>}
-
+                
+                {/* Update and Cancel Buttons */}
                 <div className="form-actions">
                     <button type="submit" className="submit-button">Update Employee</button>
                     <button type="button" onClick={handleCancel} className="cancel-button">Cancel</button>

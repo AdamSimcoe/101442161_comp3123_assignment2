@@ -1,10 +1,43 @@
 // Created by Adam Simcoe - 101442161
-// Last Updated - October 10th, 2024
+// Last Updated - November 29th, 2024
 
 const express = require('express');
 const { getDB } = require('../database/mongoDb');
 const { ObjectId } = require('mongodb');
 const router = express.Router();
+
+// SEARCH /api/v1/emp/employees/search
+router.get('/employees/search', async (req, res) => {
+    console.log("Search route reached");
+
+    const { position, department } = req.query;
+
+    try { 
+        const db = await getDB();
+        const query = {};
+
+        if (position) {
+            query.position = {$regex: position, $options: 'i'};
+        }
+
+        if (department) {
+            query.department = {$regex: department, $options: 'i'};
+        }
+
+        console.log('Search query:', query);
+
+        const employees = await db.collection('employees').find(query).toArray();
+
+        if (employees.length === 0) {
+            return res.status(404).json({message: 'No employees could be found under that search criteria.'});
+        }
+
+        res.status(200).json(employees);
+    } catch (err) {
+        console.error('Error occured while searching employees:', err);
+        res.status(500).json({message: 'Server error.'});
+    }
+});
 
 // POST /api/v1/emp/employees
 router.post('/employees', async (req, res) => {
